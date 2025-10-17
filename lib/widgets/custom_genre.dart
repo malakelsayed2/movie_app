@@ -13,7 +13,7 @@ class CustomGenre extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.grey.withOpacity(0.4),
+        color: Colors.grey.withOpacity(0.3),
       ),
       child: Text(
         genre,

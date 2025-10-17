@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/view_model/app_brain.dart';
 import 'package:movie_app/widgets/custom_genre.dart';
 
 import '../models/movie_model.dart';
@@ -50,7 +51,7 @@ class MovieDetails extends StatelessWidget {
                       vertical: 20,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade900,
+                      color: appBrain.isDark.value ?Colors.grey.shade900 : Colors.white,
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(40),
                         topLeft: Radius.circular(40),
@@ -76,7 +77,7 @@ class MovieDetails extends StatelessWidget {
                                   Icon(Icons.star, color: Colors.yellow, size: 20),
                                   SizedBox(width: 5),
                                   Text(
-                                    "${model.voteAverage}/10",
+                                    "${model.voteAverage.toStringAsFixed(1)}/10",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,

@@ -46,7 +46,7 @@ class CustomMovieCard extends StatelessWidget {
                     Icon(Icons.star, color: Colors.yellow, size: 20),
                     SizedBox(width: 5),
                     Text(
-                      "${model.voteAverage}/10",
+                      "${model.voteAverage.toStringAsFixed(1)}/10",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

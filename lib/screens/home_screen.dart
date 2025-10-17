@@ -30,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.dark_mode)),
+          IconButton(onPressed: () {
+            appBrain.changeTheme();
+          }, icon: Icon(appBrain.isDark.value ?Icons.light_mode_outlined : Icons.dark_mode)),
         ],
       ),
       body: ValueListenableBuilder(
