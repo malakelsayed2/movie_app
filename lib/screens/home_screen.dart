@@ -76,29 +76,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: CustomMovieCard(
                     model: appBrain.movieList.value[index],
                     onPressed: () {
-                      appBrain.favourites.value.add(
-                        MovieModel(
-                          adult: appBrain.movieList.value[index].adult,
-                          backdropPath:
-                              appBrain.movieList.value[index].backdropPath,
-                          id: appBrain.movieList.value[index].id,
-                          originalLanguage:
-                              appBrain.movieList.value[index].originalLanguage,
-                          originalTitle:
-                              appBrain.movieList.value[index].originalTitle,
-                          overview: appBrain.movieList.value[index].overview,
-                          popularity:
-                              appBrain.movieList.value[index].popularity,
-                          posterPath:
-                              appBrain.movieList.value[index].posterPath,
-                          releaseDate:
-                              appBrain.movieList.value[index].releaseDate,
-                          title: appBrain.movieList.value[index].title,
-                          voteAverage:
-                              appBrain.movieList.value[index].voteAverage,
-                          voteCount: appBrain.movieList.value[index].voteCount,
-                        ),
-                      );
+                      appBrain.addToFavourites(MovieModel(
+                        adult: appBrain.movieList.value[index].adult,
+                        backdropPath:
+                        appBrain.movieList.value[index].backdropPath,
+                        id: appBrain.movieList.value[index].id,
+                        originalLanguage:
+                        appBrain.movieList.value[index].originalLanguage,
+                        originalTitle:
+                        appBrain.movieList.value[index].originalTitle,
+                        overview: appBrain.movieList.value[index].overview,
+                        popularity:
+                        appBrain.movieList.value[index].popularity,
+                        posterPath:
+                        appBrain.movieList.value[index].posterPath,
+                        releaseDate:
+                        appBrain.movieList.value[index].releaseDate,
+                        title: appBrain.movieList.value[index].title,
+                        voteAverage:
+                        appBrain.movieList.value[index].voteAverage,
+                        voteCount: appBrain.movieList.value[index].voteCount,
+                      ));
                     },
                   ),
                 );

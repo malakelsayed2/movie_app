@@ -2,12 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/movie_model.dart';
 
+import '../view_model/app_brain.dart';
 import 'custom_genre.dart';
 
 class CustomMovieCard extends StatelessWidget {
-  const CustomMovieCard({super.key, required this.model, required this.onPressed});
-  final MovieModel model ;
-  final VoidCallback onPressed ;
+  const CustomMovieCard({
+    super.key,
+    required this.model,
+    required this.onPressed,
+  });
+
+  final MovieModel model;
+
+  final VoidCallback onPressed;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +28,7 @@ class CustomMovieCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Hero(
-              tag: model.id ,
+              tag: model.id,
               child: Image.network(
                 "https://image.tmdb.org/t/p/w500${model.backdropPath}",
                 height: 150,
@@ -59,9 +67,7 @@ class CustomMovieCard extends StatelessWidget {
                 Wrap(
                   spacing: 5,
                   runSpacing: 8,
-                  children: [
-                    CustomGenre(genre: "genre"),
-                  ],
+                  children: [CustomGenre(genre: "genre")],
                 ),
                 Row(
                   children: [
@@ -75,7 +81,26 @@ class CustomMovieCard extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    IconButton(onPressed: onPressed,icon: Icon(CupertinoIcons.heart),),
+                    ValueListenableBuilder(
+                      valueListenable: appBrain.favourites,
+                      builder: (context, value, child) {
+                        return IconButton(
+                          onPressed: () {
+                            if (appBrain.favourites.value.contains(model)) {
+                              appBrain.removeFromFavourites(model);
+                            } else {
+                              appBrain.addToFavourites(model);
+                            }
+                          },
+                          icon: appBrain.favourites.value.contains(model)
+                              ? Icon(
+                                  CupertinoIcons.heart_fill,
+                                  color: Colors.red,
+                                )
+                              : Icon(CupertinoIcons.heart),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ],

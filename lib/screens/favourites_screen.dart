@@ -14,17 +14,24 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ValueListenableBuilder(valueListenable: appBrain.favourites,
+      body: ValueListenableBuilder(
+        valueListenable: appBrain.favourites,
         builder: (context, value, child) {
           return Expanded(
-            child: ListView.builder(
-              itemCount: appBrain.favourites.value.length,
-              itemBuilder:(context, index) {
-              return CustomMovieCard(
-                  model: appBrain.favourites.value[index], onPressed: () {  },);
-            },),
+            child: appBrain.favourites.value.isEmpty
+                ? Center(child: Text("Empty" , style: TextStyle(fontSize: 25),))
+                : ListView.builder(
+                    itemCount: appBrain.favourites.value.length,
+                    itemBuilder: (context, index) {
+                      return CustomMovieCard(
+                        model: appBrain.favourites.value[index],
+                        onPressed: () {},
+                      );
+                    },
+                  ),
           );
-        },),
+        },
+      ),
     );
   }
 }
