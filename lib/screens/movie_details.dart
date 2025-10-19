@@ -32,11 +32,11 @@ class MovieDetails extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: Colors.grey.shade900.withOpacity(0.8),
                     radius: 25,
-                    child: IconButton(
+                    child:  IconButton(
                       onPressed: () {
                         Navigator.pop(context) ;
                       },
-                      icon: Icon(CupertinoIcons.left_chevron),
+                      icon: const Icon(CupertinoIcons.left_chevron),
                     ),
                   ),
                 ),
@@ -63,32 +63,32 @@ class MovieDetails extends StatelessWidget {
                         children: [
                           Text(
                             model.title,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.star, color: Colors.yellow, size: 20),
-                                  SizedBox(width: 5),
+                                  const Icon(Icons.star, color: Colors.yellow, size: 20),
+                                  const SizedBox(width: 5),
                                   Text(
                                     "${model.voteAverage.toStringAsFixed(1)}/10",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
                               ),
-                              Text(model.releaseDate, style: TextStyle(fontSize: 20)),
+                              Text(model.releaseDate, style: const TextStyle(fontSize: 20)),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Wrap(
                             spacing: 5,
                             runSpacing: 8,
@@ -98,10 +98,10 @@ class MovieDetails extends StatelessWidget {
                               CustomGenre(genre: "genre"),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Text(
                             model.overview ,
-                            style: TextStyle(fontSize: 17),
+                            style: const TextStyle(fontSize: 17),
                           ),
                         ],
                       ),

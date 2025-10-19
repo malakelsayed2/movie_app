@@ -5,8 +5,9 @@ import 'package:movie_app/models/movie_model.dart';
 import 'custom_genre.dart';
 
 class CustomMovieCard extends StatelessWidget {
-  const CustomMovieCard({super.key, required this.model});
+  const CustomMovieCard({super.key, required this.model, required this.onPressed});
   final MovieModel model ;
+  final VoidCallback onPressed ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,33 +29,33 @@ class CustomMovieCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   model.title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
+                // const SizedBox(height: 8),
                 Row(
                   children: [
                     Icon(Icons.star, color: Colors.yellow, size: 20),
                     SizedBox(width: 5),
                     Text(
                       "${model.voteAverage.toStringAsFixed(1)}/10",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                // SizedBox(height: 8),
                 Wrap(
                   spacing: 5,
                   runSpacing: 8,
@@ -62,20 +63,19 @@ class CustomMovieCard extends StatelessWidget {
                     CustomGenre(genre: "genre"),
                   ],
                 ),
-                Spacer(),
                 Row(
                   children: [
                     Icon(CupertinoIcons.time, color: Colors.green),
                     SizedBox(width: 5),
                     Text(
                       model.releaseDate,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Spacer(),
-                    Icon(CupertinoIcons.heart),
+                    const Spacer(),
+                    IconButton(onPressed: onPressed,icon: Icon(CupertinoIcons.heart),),
                   ],
                 ),
               ],

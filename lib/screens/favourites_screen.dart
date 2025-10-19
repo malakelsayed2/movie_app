@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:movie_app/view_model/app_brain.dart';
+import 'package:movie_app/widgets/custom_movie_card.dart';
+
+class FavouritesScreen extends StatefulWidget {
+  const FavouritesScreen({super.key});
+
+  @override
+  State<FavouritesScreen> createState() => _FavouritesScreenState();
+}
+
+class _FavouritesScreenState extends State<FavouritesScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: ValueListenableBuilder(valueListenable: appBrain.favourites,
+        builder: (context, value, child) {
+          return Expanded(
+            child: ListView.builder(
+              itemCount: appBrain.favourites.value.length,
+              itemBuilder:(context, index) {
+              return CustomMovieCard(
+                  model: appBrain.favourites.value[index], onPressed: () {  },);
+            },),
+          );
+        },),
+    );
+  }
+}

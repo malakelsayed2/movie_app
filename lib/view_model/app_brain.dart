@@ -8,6 +8,7 @@ class AppBrain{
   ValueNotifier <List<MovieModel>>movieList = ValueNotifier([]) ;
 
   ValueNotifier isDark = ValueNotifier(true) ;
+  ValueNotifier <List<MovieModel>> favourites = ValueNotifier([]) ;
 
   void changeTheme(){
     isDark.value = !isDark.value ;
