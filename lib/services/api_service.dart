@@ -6,12 +6,13 @@ import 'package:movie_app/models/movie_model.dart';
 import '../view_model/app_brain.dart';
 
 class ApiService {
-  static final String endpoint = "https://api.themoviedb.org/3/movie/popular";
 
   static final String apiKey =
       "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjhiZDc2NTdhNjcyZDlkZjk1MjFkYzQ0NWRjY2FhYSIsIm5iZiI6MTc2MDQ1ODYyNC45MjQsInN1YiI6IjY4ZWU3NzgwZDBiMTAzYmMzYzI4MzAxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SozlzYkJ6tgk-deqwxvZtFoG95mzkawPx-SAaWvvqVQ";
 
-  static void fetchPopularMovies() async {
+  static void fetchPopularMovies({int page = 1}) async {
+
+    final String endpoint = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=$page";
     final Map<String, String> header = {
       'Authorization': 'Bearer $apiKey',
       'accept': 'application/json',
@@ -20,15 +21,11 @@ class ApiService {
     final url = Uri.parse(endpoint);
 
     final response = await http.get(url, headers: header);
-    // print(response.body);
 
     if (response.statusCode == 200) {
       final mapResponse = jsonDecode(response.body);
-      // print(mapResponse);
 
       final results = mapResponse["results"] as List;
-
-      // print(results);
 
       final fetchedMovies = results.map((map) {
         return MovieModel(
@@ -44,13 +41,40 @@ class ApiService {
           voteCount: map['vote_count'],
           backdropPath: map['backdrop_path'],
           posterPath: map['poster_path'],
+          genreIds : map['genre_ids'],
         );
       }).toList();
 
-      // print(fetchedMovies.length) ;
-      // print(fetchedMovies.runtimeType) ;
+      appBrain.movieList.value = [...appBrain.movieList.value, ...fetchedMovies];
 
-      appBrain.movieList.value = fetchedMovies ;
+      appBrain.currentPage += 1;
     }
   }
-}
+  static void fetchGenre()async {
+    Map<int,String> genreMap = {} ;
+    final String endpoint = 'https://api.themoviedb.org/3/genre/movie/list?language=en';
+    final Map<String, String> header = {
+      'Authorization': 'Bearer $apiKey',
+      'accept': 'application/json',
+    };
+
+    final url = Uri.parse(endpoint);
+
+    final response = await http.get(url, headers: header);
+
+
+    if(response.statusCode ==200){
+      final mapResponse = jsonDecode(response.body) ;
+
+
+      final genreList = mapResponse["genres"] as List ;
+
+      // print(genreList) ;
+
+     for(Map map in genreList){
+       genreMap[map["id"]] = map["name"]  ;
+     }
+
+     appBrain.genreMap = genreMap ;
+    }
+  }}

@@ -9,17 +9,14 @@ class CustomMovieCard extends StatelessWidget {
   const CustomMovieCard({
     super.key,
     required this.model,
-    required this.onPressed,
   });
 
   final MovieModel model;
 
-  final VoidCallback onPressed;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 230,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -31,7 +28,7 @@ class CustomMovieCard extends StatelessWidget {
               tag: model.id,
               child: Image.network(
                 "https://image.tmdb.org/t/p/w500${model.backdropPath}",
-                height: 150,
+                height: 180,
                 width: 100,
                 fit: BoxFit.cover,
               ),
@@ -41,6 +38,7 @@ class CustomMovieCard extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
                   model.title,
@@ -63,11 +61,13 @@ class CustomMovieCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                // SizedBox(height: 8),
                 Wrap(
                   spacing: 5,
                   runSpacing: 8,
-                  children: [CustomGenre(genre: "genre")],
+                  children: model.genreIds.map((id) {
+                    final label =  appBrain.genreMap[id] ;
+                        return CustomGenre(genre: label?? "N/A") ;
+                  },).toList(),
                 ),
                 Row(
                   children: [

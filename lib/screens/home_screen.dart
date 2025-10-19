@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/models/movie_model.dart';
 import 'package:movie_app/screens/favourites_screen.dart';
 import 'package:movie_app/screens/movie_details.dart';
 import 'package:movie_app/services/api_service.dart';
@@ -10,15 +9,26 @@ import '../widgets/custom_movie_card.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final scrollcontroller = ScrollController();
+
   @override
   void initState() {
     // TODO: implement initState
+    ApiService.fetchGenre() ;
     ApiService.fetchPopularMovies();
+    scrollcontroller.addListener((){
+      print(scrollcontroller.position.pixels);
+      if(scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent){
+        print("REached end of the list");
+        ApiService.fetchPopularMovies(page: appBrain.currentPage);
+      }
+    });
     super.initState();
   }
 
@@ -38,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(builder: (context) => FavouritesScreen()),
               );
             },
-            icon: Icon(CupertinoIcons.heart),
+            icon: Icon(CupertinoIcons.heart_fill),
           ),
           IconButton(
             onPressed: () {
@@ -58,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
+              controller: scrollcontroller,
               itemCount: appBrain.movieList.value.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -75,29 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: CustomMovieCard(
                     model: appBrain.movieList.value[index],
-                    onPressed: () {
-                      appBrain.addToFavourites(MovieModel(
-                        adult: appBrain.movieList.value[index].adult,
-                        backdropPath:
-                        appBrain.movieList.value[index].backdropPath,
-                        id: appBrain.movieList.value[index].id,
-                        originalLanguage:
-                        appBrain.movieList.value[index].originalLanguage,
-                        originalTitle:
-                        appBrain.movieList.value[index].originalTitle,
-                        overview: appBrain.movieList.value[index].overview,
-                        popularity:
-                        appBrain.movieList.value[index].popularity,
-                        posterPath:
-                        appBrain.movieList.value[index].posterPath,
-                        releaseDate:
-                        appBrain.movieList.value[index].releaseDate,
-                        title: appBrain.movieList.value[index].title,
-                        voteAverage:
-                        appBrain.movieList.value[index].voteAverage,
-                        voteCount: appBrain.movieList.value[index].voteCount,
-                      ));
-                    },
                   ),
                 );
               },

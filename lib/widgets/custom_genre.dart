@@ -8,7 +8,7 @@ class CustomGenre extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       padding: EdgeInsetsGeometry.symmetric(
-        horizontal: 10,
+        horizontal: 6,
         vertical: 3,
       ),
       decoration: BoxDecoration(
@@ -17,7 +17,7 @@ class CustomGenre extends StatelessWidget {
       ),
       child: Text(
         genre,
-        style: TextStyle(fontSize: 17),
+        style: TextStyle(fontSize: 15),
       ),
     );
   }

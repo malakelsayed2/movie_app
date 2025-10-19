@@ -11,6 +11,7 @@ class MovieModel{
   final String title ;
   final double voteAverage ;
   final int voteCount ;
+  final List genreIds ;
 
   const MovieModel({
     required this.adult,
@@ -25,5 +26,6 @@ class MovieModel{
     required this.title,
     required this.voteAverage,
     required this.voteCount,
+    required this.genreIds,
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movie_app/models/movie_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Global variable that any file can access it
 final appBrain = AppBrain();
@@ -10,9 +11,18 @@ class AppBrain {
   ValueNotifier isDark = ValueNotifier(true);
 
   ValueNotifier<List<MovieModel>> favourites = ValueNotifier([]);
+  Map<int,String> genreMap = {} ;
+  int currentPage =1 ;
+  Future initializeApp()async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  void changeTheme() {
+    final savedTheme = await prefs.getBool('theme') ;
+    isDark.value  = savedTheme ?? true;
+  }
+  void changeTheme()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     isDark.value = !isDark.value;
+    await prefs.setBool('theme', isDark.value);
   }
 
   void addToFavourites(MovieModel model) {

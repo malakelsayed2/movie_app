@@ -17,19 +17,19 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
       body: ValueListenableBuilder(
         valueListenable: appBrain.favourites,
         builder: (context, value, child) {
-          return Expanded(
-            child: appBrain.favourites.value.isEmpty
-                ? Center(child: Text("Empty" , style: TextStyle(fontSize: 25),))
-                : ListView.builder(
+          return appBrain.favourites.value.isEmpty
+              ? Center(child: Text("Empty" , style: TextStyle(fontSize: 25),))
+              : SizedBox(
+                height: double.infinity,
+                child: ListView.builder(
                     itemCount: appBrain.favourites.value.length,
                     itemBuilder: (context, index) {
                       return CustomMovieCard(
                         model: appBrain.favourites.value[index],
-                        onPressed: () {},
                       );
                     },
                   ),
-          );
+              );
         },
       ),
     );

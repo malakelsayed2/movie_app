@@ -92,11 +92,10 @@ class MovieDetails extends StatelessWidget {
                           Wrap(
                             spacing: 5,
                             runSpacing: 8,
-                            children: [
-                              CustomGenre(genre: "genre"),
-                              CustomGenre(genre: "genre"),
-                              CustomGenre(genre: "genre"),
-                            ],
+                            children:model.genreIds.map((id) {
+                              final label =  appBrain.genreMap[id] ;
+                              return CustomGenre(genre: label?? "N/A") ;
+                            },).toList(),
                           ),
                           const SizedBox(height: 20),
                           Text(
