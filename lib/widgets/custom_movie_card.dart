@@ -16,7 +16,7 @@ class CustomMovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 230,
+      height: 200,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -28,7 +28,7 @@ class CustomMovieCard extends StatelessWidget {
               tag: model.id,
               child: Image.network(
                 "https://image.tmdb.org/t/p/w500${model.backdropPath}",
-                height: 180,
+                height: 150,
                 width: 100,
                 fit: BoxFit.cover,
               ),
@@ -43,7 +43,7 @@ class CustomMovieCard extends StatelessWidget {
                 Text(
                   model.title,
                   style: const TextStyle(
-                    fontSize: 25,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -55,7 +55,7 @@ class CustomMovieCard extends StatelessWidget {
                     Text(
                       "${model.voteAverage.toStringAsFixed(1)}/10",
                       style: const TextStyle(
-                        fontSize: 16,
+                        // fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -76,7 +76,7 @@ class CustomMovieCard extends StatelessWidget {
                     Text(
                       model.releaseDate,
                       style: const TextStyle(
-                        fontSize: 16,
+                        // fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

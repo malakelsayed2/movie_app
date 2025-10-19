@@ -30,13 +30,13 @@ class MovieDetails extends StatelessWidget {
                   left: 10,
                   top: 70,
                   child: CircleAvatar(
-                    backgroundColor: Colors.grey.shade900.withOpacity(0.8),
+                    backgroundColor: Colors.grey.shade900.withOpacity(0.7),
                     radius: 25,
                     child:  IconButton(
                       onPressed: () {
                         Navigator.pop(context) ;
                       },
-                      icon: const Icon(CupertinoIcons.left_chevron),
+                      icon: const Icon(CupertinoIcons.left_chevron, color: Colors.white,),
                     ),
                   ),
                 ),
@@ -79,13 +79,13 @@ class MovieDetails extends StatelessWidget {
                                   Text(
                                     "${model.voteAverage.toStringAsFixed(1)}/10",
                                     style: const TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
                               ),
-                              Text(model.releaseDate, style: const TextStyle(fontSize: 20)),
+                              Text(model.releaseDate, style: const TextStyle(fontSize: 16)),
                             ],
                           ),
                           const SizedBox(height: 20),
@@ -100,7 +100,7 @@ class MovieDetails extends StatelessWidget {
                           const SizedBox(height: 20),
                           Text(
                             model.overview ,
-                            style: const TextStyle(fontSize: 17),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ],
                       ),

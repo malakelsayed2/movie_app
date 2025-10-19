@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         valueListenable: appBrain.movieList,
         builder: (BuildContext context, value, Widget? child) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0 ),
             child: ListView.builder(
               controller: scrollcontroller,
               itemCount: appBrain.movieList.value.length,
