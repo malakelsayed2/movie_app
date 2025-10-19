@@ -20,10 +20,15 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         valueListenable: appBrain.favourites,
         builder: (context, value, child) {
           return appBrain.favourites.value.isEmpty
-              ? Center(child: Text("No Favourites to show!" , style: TextStyle(fontSize: 20),))
+              ? Center(
+                  child: Text(
+                    "No Favourites to show!",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
               : SizedBox(
-                height: double.infinity,
-                child: ListView.builder(
+                  height: double.infinity,
+                  child: ListView.builder(
                     itemCount: appBrain.favourites.value.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -45,7 +50,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       );
                     },
                   ),
-              );
+                );
         },
       ),
     );

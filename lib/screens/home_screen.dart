@@ -9,7 +9,6 @@ import '../widgets/custom_movie_card.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -20,11 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    ApiService.fetchGenre() ;
-    ApiService.fetchPopularMovies();
-    scrollcontroller.addListener((){
+    scrollcontroller.addListener(() {
       print(scrollcontroller.position.pixels);
-      if(scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent){
+      if (scrollcontroller.position.pixels ==
+          scrollcontroller.position.maxScrollExtent) {
         print("REached end of the list");
         ApiService.fetchPopularMovies(page: appBrain.currentPage);
       }
@@ -66,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         valueListenable: appBrain.movieList,
         builder: (BuildContext context, value, Widget? child) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0 ),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ListView.builder(
               controller: scrollcontroller,
               itemCount: appBrain.movieList.value.length,

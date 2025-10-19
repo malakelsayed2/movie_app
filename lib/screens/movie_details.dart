@@ -8,10 +8,11 @@ import '../models/movie_model.dart';
 class MovieDetails extends StatelessWidget {
   const MovieDetails({super.key, required this.model});
 
-  final MovieModel model ;
+  final MovieModel model;
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context) ;
+    final size = MediaQuery.of(context);
     return Scaffold(
       body: Column(
         children: [
@@ -19,10 +20,10 @@ class MovieDetails extends StatelessWidget {
             child: Stack(
               children: [
                 Hero(
-                  tag: model.id ,
+                  tag: model.id,
                   child: Image.network(
                     "https://image.tmdb.org/t/p/w500${model.backdropPath}",
-                    height: size.size.height*0.5,
+                    height: size.size.height * 0.5,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -32,11 +33,14 @@ class MovieDetails extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: Colors.grey.shade900.withOpacity(0.7),
                     radius: 25,
-                    child:  IconButton(
+                    child: IconButton(
                       onPressed: () {
-                        Navigator.pop(context) ;
+                        Navigator.pop(context);
                       },
-                      icon: const Icon(CupertinoIcons.left_chevron, color: Colors.white,),
+                      icon: const Icon(
+                        CupertinoIcons.left_chevron,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -45,13 +49,15 @@ class MovieDetails extends StatelessWidget {
                   right: 0,
                   left: 0,
                   child: Container(
-                    height: size.size.height*0.6,
+                    height: size.size.height * 0.6,
                     padding: EdgeInsetsGeometry.symmetric(
                       horizontal: 20,
                       vertical: 20,
                     ),
                     decoration: BoxDecoration(
-                      color: appBrain.isDark.value ?Colors.grey.shade900 : Colors.white,
+                      color: appBrain.isDark.value
+                          ? Colors.grey.shade900
+                          : Colors.white,
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(40),
                         topLeft: Radius.circular(40),
@@ -74,7 +80,11 @@ class MovieDetails extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.star, color: Colors.yellow, size: 20),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 5),
                                   Text(
                                     "${model.voteAverage.toStringAsFixed(1)}/10",
@@ -85,21 +95,24 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Text(model.releaseDate, style: const TextStyle(fontSize: 16)),
+                              Text(
+                                model.releaseDate,
+                                style: const TextStyle(fontSize: 16),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 20),
                           Wrap(
                             spacing: 5,
                             runSpacing: 8,
-                            children:model.genreIds.map((id) {
-                              final label =  appBrain.genreMap[id] ;
-                              return CustomGenre(genre: label?? "N/A") ;
-                            },).toList(),
+                            children: model.genreIds.map((id) {
+                              final label = appBrain.genreMap[id];
+                              return CustomGenre(genre: label ?? "N/A");
+                            }).toList(),
                           ),
                           const SizedBox(height: 20),
                           Text(
-                            model.overview ,
+                            model.overview,
                             style: const TextStyle(fontSize: 16),
                           ),
                         ],
